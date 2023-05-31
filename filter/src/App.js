@@ -1,40 +1,26 @@
-import React, { useState } from "react";
 import "./App.css";
-import Data from "./Data.json";
+import "./images";
+import React, { useState } from "react";
+import images from "./images";
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedImg, setselectedImg] = useState(images[0]);
+
   return (
-    <div className="container">
-      <h1>Domestic Cat Varieties</h1>
-      <div className="inputContainer">
-        <input
-          className="search"
-          type="text"
-          placeholder="Please,choose an animal type "
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+    <div className="App">
+      <div className="container">
+        <img src={selectedImg} alt="selected" className="selected" />
       </div>
-      <div className="dataContainer">
-        {Data.filter((val) => {
-          if (searchTerm == "") {
-            return val;
-          } else if (
-            val.title
-              .toLocaleLowerCase()
-              .includes(searchTerm.toLocaleLowerCase())
-          ) {
-            return val;
-          }
-        }).map((val) => {
-          return (
-            <div className="data" key={val.id}>
-              <img src={val.image} alt="" />
-              <h3>{val.title}</h3>
-              <p>{val.Description}</p>
-            </div>
-          );
-        })}
+
+      <div className="imgContainer">
+        {images.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt="tantuni"
+            onClick={() => setselectedImg(img)}
+          />
+        ))}
       </div>
     </div>
   );
